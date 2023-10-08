@@ -1,2 +1,2 @@
 web: python app.py
-web: gunicorn hooshappenings.wsgi
+web: gunicorn hoos.wsgi
