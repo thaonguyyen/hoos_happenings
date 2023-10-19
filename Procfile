@@ -1,1 +1,2 @@
-web: gunicorn b13.wsgi
+release: python manage.py migrate
+web: gunicorn buildexample.wsgi
