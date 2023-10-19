@@ -7,15 +7,58 @@
 <head>
     <meta charset="UTF-8">
     <title class="text-center">HoosHappenings Google Sign In</title>
+    <style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+</style>
 </head>
 <center>
 <body>
     {% load socialaccount %}
+    <div class="topnav">
+  <a class="btn btn-primary" href="">Home</a>
+        <a class="btn-primary">Event Listings</a>
+  <a class="btn btn-primary" href="map">Map of Nearby Events</a>
+</div>
+
+
     <h2 class="text-center">HoosHappenings Google Login</h2>
     <a class="btn btn-primary" href="{% provider_login_url 'google' %}?next=/">Login With Google</a>
 
     {% if user.is_authenticated %}
-    <p>You are signed in as {{user.email}}</p>
+        {%  if user.is_superuser %}
+            <p>You are signed in as an admin</p>
+            {% else %}
+                <p>You are signed in as user</p>
+            {% endif  %}
+    <p>You are signed in as {{ user }} with the
+        account {{ user.email }}</p>
     <a class="btn btn-primary" href="logout">Logout</a>
     {% endif %}
 </body>
