@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ['localhost','127.0.0.1', 'https://git.heroku.com/hoos.git', 'ho
 
 
 # Application definition
-SITE_ID=2
+SITE_ID=3
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google'
+    'allauth.socialaccount.providers.google',
+    'bootstrap5'
 ]
 
 SOCIALACCOUNT_PROVIDERS = {
