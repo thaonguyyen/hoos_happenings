@@ -72,6 +72,7 @@ diff-match-patch @ file:///Users/ktietz/demo/mc3/conda-bld/diff-match-patch_1630
 dill @ file:///tmp/build/80754af9/dill_1623919422540/work
 distlib==0.3.7
 distributed @ file:///private/var/folders/sy/f16zz6x50xz3113nwtb9bvq00000gp/T/abs_ca26b14a-a121-44b5-82b0-dbb6ccf35309a1h39fbg/croots/recipe/distributed_1658520748547/work
+dj-database-url==2.1.0
 Django==4.2.6
 django-allauth==0.57.0
 django-bootstrap-v5==1.0.11
