@@ -1,0 +1,51 @@
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title class="text-center">HoosHappenings Google Sign In</title>
+    <style>
+</style>
+</head>
+<center>
+<body>
+    {% load socialaccount %}
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">HoosHappenings</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+            <a class="nav-link" href="admin_home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin_event_listings">Event Listings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin_map">Map of Nearby Events</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="review_event">Approve Events</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+    <h2 class="text-center">HoosHappenings Google Login</h2>
+    <a class="btn btn-primary" href="{% provider_login_url 'google' %}?next=/">Login With Google</a>
+    {% if user.is_authenticated %}
+        <p>You are signed in as {{ user }} with the
+            account {{ user.email }} as an Admin. </p>
+        <a class="btn btn-primary" href="logout">Logout</a>
+    {% endif %}
+
+</body>
+</center>
+</html>
