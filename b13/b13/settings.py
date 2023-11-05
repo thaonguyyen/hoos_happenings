@@ -29,7 +29,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-SITE_ID = 3
+SITE_ID = 4
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'bootstrap5'
+    'bootstrap5',
+    'googlemaps'
 ]
 
 SOCIALACCOUNT_PROVIDERS = {
