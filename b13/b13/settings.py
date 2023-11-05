@@ -91,7 +91,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'b13.wsgi.application'
 
-
+import dj_database_url
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 IS_HEROKU_APP = "DYNO" in os.environ
