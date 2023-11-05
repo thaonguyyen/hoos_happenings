@@ -41,25 +41,16 @@ body {
 <center>
 <body>
     {% load socialaccount %}
-    <div class="topnav">
-  <a class="btn btn-primary" href="">Home</a>
-        <a class="btn-primary">Event Listings</a>
-  <a class="btn btn-primary" href="map">Map of Nearby Events</a>
-</div>
 
 
     <h2 class="text-center">HoosHappenings Google Login</h2>
-    <a class="btn btn-primary" href="{% provider_login_url 'google' %}?next=/">Login With Google</a>
+
+    <a class="btn btn-primary" href="{% provider_login_url 'google' %}?next=/" style="margin-bottom: 10px;">Login With Google</a>
 
     {% if user.is_authenticated %}
-        {%  if user.is_superuser %}
-            <p>You are signed in as an admin</p>
-            {% else %}
-                <p>You are signed in as user</p>
-            {% endif  %}
-    <p>You are signed in as {{ user }} with the
-        account {{ user.email }}</p>
-    <a class="btn btn-primary" href="logout">Logout</a>
+    <div class="vertical-stack">
+        <a class="btn btn-primary" href="{% url 'authenticate' %}" style="margin-bottom: 10px;">Check Admin or User Credentials</a>
+    </div>
     {% endif %}
 </body>
 </center>
