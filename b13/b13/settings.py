@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
-#import django_heroku
 from pathlib import Path
 
 
@@ -31,7 +30,7 @@ ALLOWED_HOSTS = ['hoos-fcd2d4c24696.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
-SITE_ID = 3
+SITE_ID = 4
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -168,3 +167,9 @@ AUTHENTICATION_BACKENDS = (
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+try:
+    if 'HEROKU' in os.environ:
+        import django_heroku
+        django_heroku.settings(locals())
+except ImportError:
+    found = False
