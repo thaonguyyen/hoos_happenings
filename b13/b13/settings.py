@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ['hoos-fcd2d4c24696.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
-SITE_ID = 4
+SITE_ID = 5
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -91,7 +91,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'b13.wsgi.application'
 
-
+import dj_database_url
+os.environ.setdefault("DATABASE_URL", "postgres://mofandfeqpoatw:339fe095d20b61838de292b18f765e4e46d789adb271cb2d7ce47ea535ddd17b@ec2-35-169-9-79.compute-1.amazonaws.com:5432/dabe7ehgbuh8bp")
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 IS_HEROKU_APP = "DYNO" in os.environ
@@ -101,6 +102,7 @@ if IS_HEROKU_APP:
     # automatically by Heroku when a database addon is attached to your Heroku app. See:
     # https://devcenter.heroku.com/articles/provisioning-heroku-postgres
     # https://github.com/jazzband/dj-database-url
+
     DATABASES = {
         "default": dj_database_url.config(
             conn_max_age=600,
@@ -139,6 +141,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
+
+FIXTURE_DIRS = ['b13']
 
 LANGUAGE_CODE = 'en-us'
 
