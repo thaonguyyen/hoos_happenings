@@ -17,11 +17,12 @@ def main():
         ) from exc
     execute_from_command_line(sys.argv)
     try:
-        import bootstrap5
+        from bootstrap5 import bootstrap
     except ModuleNotFoundError as exc:
-        raise ModuleNotFoundError("Couldn't import bootstrap") from exc
+        raise ModuleNotFoundError(
+            "Couldn't import bootstrap. Are you sure it's installed and "
+        )
     execute_from_command_line(sys.argv)
-
 
 
 if __name__ == '__main__':

@@ -11,3 +11,4 @@ def logout_view(request):
 
 def map(request):
     return render(request, "map.html")
+
