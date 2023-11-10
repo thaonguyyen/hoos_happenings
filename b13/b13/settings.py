@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
-#import django_heroku
 from pathlib import Path
 
 
@@ -46,7 +45,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'bootstrap5'
+    'bootstrap5',
+    'googlemaps'
 ]
 
 SOCIALACCOUNT_PROVIDERS = {
@@ -171,6 +171,9 @@ AUTHENTICATION_BACKENDS = (
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
-
-import django_heroku
-django_heroku.settings(locals())
+try:
+    if 'HEROKU' in os.environ:
+        import django_heroku
+        django_heroku.settings(locals())
+except ImportError:
+    found = False
