@@ -1,7 +1,10 @@
 from django.urls import path
 from . import views
+from django.contrib import admin
+from django.urls import path
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path("", views.home, name='home'),
     path("logout/", views.logout_view, name='logout'),
     path("hoos_login/", views.admin_login, name='authenticate'),
