@@ -16,6 +16,13 @@ def main():
             "forget to activate a virtual environment?"
         ) from exc
     execute_from_command_line(sys.argv)
+    try:
+        from bootstrap5 import bootstrap
+    except ModuleNotFoundError as exc:
+        raise ModuleNotFoundError(
+            "Couldn't import bootstrap. Are you sure it's installed and "
+        )
+    execute_from_command_line(sys.argv)
 
 
 if __name__ == '__main__':
