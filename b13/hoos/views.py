@@ -1,9 +1,11 @@
+import googlemaps
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from .forms import EventSubmissionForm
 from .models import EventSubmission
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+
 
 # Create your views here.
 def home(request):
@@ -14,10 +16,14 @@ def logout_view(request):
     return redirect("/")
 
 def user_map(request):
-    return render(request, "user_map.html")
+    events = EventSubmission.objects.filter(approved=True)
+    context = {'events': events}
+    return render(request, "user_map.html", context)
 
 def admin_map(request):
-    return render(request, "admin_map.html")
+    events = EventSubmission.objects.filter(approved=True)
+    context = {'events': events}
+    return render(request, "admin_map.html", context)
 
 def admin_login(request):
     if request.user.is_authenticated and request.user.is_superuser:
@@ -38,6 +44,11 @@ def submit_event(request):
         form = EventSubmissionForm(request.POST)
         if form.is_valid():
             submission = form.save(commit=False)
+            gmaps = googlemaps.Client(key='AIzaSyBFnP0Yo4IN8h8Q1U4SjPKdJH9X1QeiKMc')
+            geocode_result = gmaps.geocode(submission.location)
+            if geocode_result:
+                submission.latitude = geocode_result[0]['geometry']['location']['lat']
+                submission.longitude = geocode_result[0]['geometry']['location']['lng']
             submission.user = request.user
             form.save()
             return redirect('submit_event')  # Redirect to a success page or wherever appropriate

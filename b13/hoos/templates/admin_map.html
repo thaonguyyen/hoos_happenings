@@ -85,6 +85,26 @@
 
               const map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
+             {% for event in events %}
+                console.log(event)
+                var marker = new google.maps.Marker({
+                position: { lat: {{ event.latitude }}, lng: {{ event.longitude }} },
+                map: map,
+                title: "{{ event.name }}"
+                });
+
+                // Create an infowindow for the user's location
+                var eventLocation = new google.maps.InfoWindow({
+                    content: "{{ event.description }}"
+                });
+
+                // Add a click event listener to the userLocationMarker to display the infowindow
+                marker.addListener("click", function () {
+                     eventLocation.open(map, marker);
+                });
+
+            {% endfor %}
+
               if (navigator.geolocation) {
                   navigator.geolocation.getCurrentPosition(function (position) {
                       const userLocation = {
@@ -132,8 +152,10 @@
                       }
                   });
                   map.fitBounds(bounds);
+
               });
-          }
+    }
+
       </script>
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFnP0Yo4IN8h8Q1U4SjPKdJH9X1QeiKMc&libraries=places&callback=initMap"
               async defer></script>
