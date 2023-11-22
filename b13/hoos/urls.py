@@ -25,4 +25,6 @@ urlpatterns = [
     path("hoos_user/user_home/", views.user_view, name='user_home'),
     path("hoos_user/user_map/", views.user_map, name='user_map'),
     path('hoos_user/user_event_listings/', views.user_event_listings, name='user_event_listings'),
+
+    path('welcome/', views.welcome, name='welcome')
 ]

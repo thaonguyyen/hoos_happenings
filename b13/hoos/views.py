@@ -8,12 +8,21 @@ from django.urls import reverse
 
 
 # Create your views here.
+def is_admin(user):
+    return user.is_superuser
+
 def home(request):
+    if request.user.is_authenticated:
+        return redirect('welcome')
     return render(request, "home.html")
 
 def logout_view(request):
     logout(request)
     return redirect("/")
+
+def welcome(request):
+    user_type = 'an Admin' if is_admin(request.user) else 'a User'
+    return render(request, 'welcome.html', context={'user_type': user_type})
 
 def user_map(request):
     events = EventSubmission.objects.filter(approved=True)
@@ -29,9 +38,6 @@ def admin_login(request):
     if request.user.is_authenticated and request.user.is_superuser:
             return redirect('home_admin')
     return redirect('home_user')
-
-def is_admin(user):
-    return user.is_superuser
 
 def admin_view(request):
     return render(request, 'home_admin.html')
