@@ -56,11 +56,15 @@ def submit_event(request):
 def review_events(request):
     if not request.user.is_authenticated:
         return redirect('home')
+    if not is_admin(request.user):
+        return redirect('home')
     events = EventSubmission.objects.filter(approved=False)
     return render(request, 'review.html', {'events': events})
 
 def approve_event(request, event_id):
     if not request.user.is_authenticated:
+        return redirect('home')
+    if not is_admin(request.user):
         return redirect('home')
     event = EventSubmission.objects.get(id=event_id)
     event.approved = True
