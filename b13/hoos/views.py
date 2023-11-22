@@ -28,34 +28,10 @@ def welcome(request):
     user_type = 'an Admin' if is_admin(request.user) else 'a User'
     return render(request, 'welcome.html', context={'user_type': user_type})
 
-def user_map(request):
-    if not request.user.is_authenticated:
-        return redirect('home')
-    events = EventSubmission.objects.filter(approved=True)
-    context = {'events': events}
-    return render(request, "user_map.html", context)
-
-def admin_map(request):
-    if not request.user.is_authenticated:
-        return redirect('home')
-    events = EventSubmission.objects.filter(approved=True)
-    context = {'events': events}
-    return render(request, "admin_map.html", context)
-
 def admin_login(request):
     if request.user.is_authenticated and request.user.is_superuser:
             return redirect('home_admin')
     return redirect('home_user')
-
-def admin_view(request):
-    if not request.user.is_authenticated:
-        return redirect('home')
-    return render(request, 'home_admin.html')
-
-def user_view(request):
-    if not request.user.is_authenticated:
-        return redirect('home')
-    return render(request, 'home_user.html')
 
 def submit_event(request):
     if not request.user.is_authenticated:
@@ -88,16 +64,16 @@ def approve_event(request, event_id):
     event = EventSubmission.objects.get(id=event_id)
     event.approved = True
     event.save()
-    return redirect('review_event')
+    return redirect('review_events')
 
-def user_event_listings(request):
+def listings(request):
     if not request.user.is_authenticated:
         return redirect('home')
     events = EventSubmission.objects.filter(approved=True)
-    return render(request, 'user_listings.html', {'events': events})
+    return render(request, 'listings.html', context={'events': events})
 
-def admin_event_listings(request):
+def map_view(request):
     if not request.user.is_authenticated:
         return redirect('home')
     events = EventSubmission.objects.filter(approved=True)
-    return render(request, 'admin_listings.html', {'events': events})
+    return render(request, "map.html", context={'events': events})
