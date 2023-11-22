@@ -47,7 +47,8 @@ def submit_event(request):
                 submission.longitude = geocode_result[0]['geometry']['location']['lng']
             submission.user = request.user
             form.save()
-            return redirect('submit_event')  # Redirect to a success page or wherever appropriate
+            context = {'submission': submission, 'valid_location': bool(geocode_result)}
+            return render(request, 'submit_confirmation.html', context=context)
     else:
         form = EventSubmissionForm()
     return render(request, 'submit.html', {'form': form})
