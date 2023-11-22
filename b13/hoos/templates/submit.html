@@ -1,8 +1,7 @@
 {% extends 'authenticated.html' %}
 
-{% block extrahead %}<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFnP0Yo4IN8h8Q1U4SjPKdJH9X1QeiKMc&libraries=places&callback=initAutocomplete" async defer></script>{% endblock %}
-
 {% block postnav %}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFnP0Yo4IN8h8Q1U4SjPKdJH9X1QeiKMc&libraries=places&callback=initAutocomplete" async defer></script>
   <div class="container mt-3">
     <h2>Submit Event</h2>
     <form method="post">
@@ -18,6 +17,7 @@
       <div class="mb-3">
         <label class="form-label">Event Location:</label>
         {{ form.location }}
+        <span class="help-text">{{ form.location.help_text }}</span>
       </div>
       <div class="mb-3">
           <label class="form-label">Date and Time:</label>
@@ -30,14 +30,11 @@
       <button type="submit" class="btn btn-primary">Submit Event</button>
     </form>
   </div>
+  <script>
+    function initAutocomplete() {
+        var input = document.getElementById('autocomplete');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+    }
+  </script>
+  
 {% endblock %}
-
-<script>
-  function initAutocomplete() {
-      var input = document.getElementById('autocomplete');
-      var autocomplete = new google.maps.places.Autocomplete(input);
-  }
-</script>
-
-</body>
-</html>
