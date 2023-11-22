@@ -2,7 +2,31 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-import datetime
+from django.contrib.postgres.fields import ArrayField
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
+# class Tags(models.TextChoices):
+#     CAREER = "career", _("Career")
+#     CLUB = "club", _("Club")
+#     COLLEGE = "arts & sciences", _("Arts and Sciences")
+#     CONCERT = "concert", _("Concert")
+#     CULTURE = "culture", _("Culture")
+#     EDU = "education", _("Education")
+#     ENG = "engineering", _("Engineering")
+#     FOOD = "food", _("Food")
+#     MCINTIRE = "mcintire", _("McIntire")
+#     RELIGIOUS = "religious", _("Religious")
+#     SOCIAL = "social", _("Social")
+#     SPORTS = "sports", _("Sports")
+#     THEATRE = "theatre", _("Theatre")
+#     __empty__ = _("No Tags")
 
 
 class EventSubmission(models.Model):
@@ -14,23 +38,7 @@ class EventSubmission(models.Model):
     longitude = models.FloatField(null=True, blank=True)
     date_time = models.DateTimeField(default=None)
     approved = models.BooleanField(default=False)
-    class Tags(models.TextChoices):
-        CAREER = "career", _("Career")
-        CLUB = "club", _("Club")
-        COLLEGE = "arts & sciences", _("Arts and Sciences")
-        CONCERT = "concert", _("Concert")
-        CULTURE = "culture", _("Culture")
-        EDU = "education", _("Education")
-        ENG = "engineering", _("Engineering")
-        FOOD = "food", _("Food")
-        MCINTIRE = "mcintire", _("McIntire")
-        RELIGIOUS = "religious", _("Religious")
-        SOCIAL = "social", _("Social")
-        SPORTS = "sports", _("Sports")
-        THEATRE = "theatre", _("Theatre")
-        __empty__ = _("No Tags")
-
-    tag = models.CharField(max_length=200, choices=Tags.choices, null=True)
+    tags = models.ManyToManyField(Tag)
 
     def __str__(self):
         return f"{self.name} by {self.user.username}"

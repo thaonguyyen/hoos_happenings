@@ -15,25 +15,24 @@
 
         const map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-                    {% for event in events %}
-        console.log(event)
-        var marker = new google.maps.Marker({
-        position: { lat: {{ event.latitude }}, lng: {{ event.longitude }} },
-        map: map,
-        title: "{{ event.name }}"
-        });
+        {% for event in events %}
+            console.log(event)
+            var marker = new google.maps.Marker({
+            position: { lat: {{ event.latitude }}, lng: {{ event.longitude }} },
+            map: map,
+            title: "{{ event.name }}"
+            });
 
-        // Create an infowindow for the user's location
-        var eventLocation = new google.maps.InfoWindow({
-            content: "{{ event.description }}"
-        });
+            // Create an infowindow for the user's location
+            var eventLocation = new google.maps.InfoWindow({
+                content: "{{ event.description|escapejs }}"
+            });
 
-        // Add a click event listener to the userLocationMarker to display the infowindow
-        marker.addListener("click", function () {
-                eventLocation.open(map, marker);
-        });
-
-    {% endfor %}
+            // Add a click event listener to the userLocationMarker to display the infowindow
+            marker.addListener("click", function () {
+                    eventLocation.open(map, marker);
+            });
+        {% endfor %}
 
 
         if (navigator.geolocation) {

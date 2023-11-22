@@ -7,7 +7,7 @@ class DateTimeInput(forms.DateTimeInput):
 class EventSubmissionForm(forms.ModelForm):
     class Meta:
         model = EventSubmission
-        fields = ['name', 'description', 'location', 'date_time', 'tag']
+        fields = ['name', 'description', 'location', 'date_time', 'tags']
         widgets = {
             'location': forms.TextInput(attrs={'id': 'autocomplete'}),
             'date_time': forms.DateTimeInput(attrs={'type': 'datetime-local'})
