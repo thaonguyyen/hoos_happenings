@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+import datetime
 
 
 class EventSubmission(models.Model):
@@ -11,6 +12,7 @@ class EventSubmission(models.Model):
     location = models.CharField(max_length=200, help_text="Enter exact address location.")
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
+    date_time = models.DateTimeField(default=None)
     approved = models.BooleanField(default=False)
     class Tags(models.TextChoices):
         CAREER = "career", _("Career")
