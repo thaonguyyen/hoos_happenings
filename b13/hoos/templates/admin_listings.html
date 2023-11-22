@@ -45,11 +45,11 @@
     <p>{{ event.location }}</p>
     <p>{{ event.date_time }}</p>
     <p>{{ event.tag }}</p>
-    <a button type="submit" class="btn btn-primary" href="{% url 'approve_event' event.id %}">Approve Event</a>
   </div>
     {% empty %}
-    <p>No events to approve.</p>
+    <p>No events available.</p>
 {% endfor %}
+
 </body>
 </center>
 </html>
