@@ -1,10 +1,37 @@
 {% extends 'authenticated.html' %}
 
 {% block postnav %}
-<div id="map-container">
+<div id="map-and-search-container">
     <input type="text" id="location-input" placeholder="Search for a location...">
-    <div id="map"></div>
+    <div id="map"></div> <!-- Container for the map -->
+    <div id="search-container">
+        <input type="text" id="tag-search" placeholder="Search by tag...">
+        <div id="event-list"></div> <!-- Container for listing events -->
+    </div>
 </div>
+
+<style>
+    #map-and-search-container {
+        display: flex;
+    }
+
+    #map {
+        height: 700px;
+        width: 60%;
+    }
+
+    #search-container {
+        width: 30%; /* Adjust the width as needed */
+        padding: 10px;
+        box-sizing: border-box; /* Include padding in width calculation */
+    }
+
+    #event-list {
+        margin-top: 20px;
+        max-height: 400px; /* Adjust as needed */
+        overflow-y: auto; /* Scrollable list */
+    }
+</style>
 
 <script>
     function initMap() {
@@ -15,24 +42,25 @@
 
         const map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-        {% for event in events %}
-            console.log(event)
-            var marker = new google.maps.Marker({
-            position: { lat: {{ event.latitude }}, lng: {{ event.longitude }} },
-            map: map,
-            title: "{{ event.name }}"
-            });
+                    {% for event in events %}
+        console.log(event)
+        var marker = new google.maps.Marker({
+        position: { lat: {{ event.latitude }}, lng: {{ event.longitude }} },
+        map: map,
+        title: "{{ event.name }}"
+        });
 
-            // Create an infowindow for the user's location
-            var eventLocation = new google.maps.InfoWindow({
-                content: "{{ event.description|escapejs }}"
-            });
+        // Create an infowindow for the user's location
+        var eventLocation = new google.maps.InfoWindow({
+            content: "{{ event.description }}"
+        });
 
-            // Add a click event listener to the userLocationMarker to display the infowindow
-            marker.addListener("click", function () {
-                    eventLocation.open(map, marker);
-            });
-        {% endfor %}
+        // Add a click event listener to the userLocationMarker to display the infowindow
+        marker.addListener("click", function () {
+                eventLocation.open(map, marker);
+        });
+
+    {% endfor %}
 
 
         if (navigator.geolocation) {
