@@ -1,15 +1,5 @@
-{% extends 'user.html' %}
+{% extends 'welcome.html' %}
 
-{% load socialaccount %}
-
-{% block postnav %}
-<center>
-<h2 class="text-center">HoosHappenings Welcome Page</h2>
-<a class="btn btn-primary" href="{% provider_login_url 'google' %}?next=/">Login With Google</a>
-{% if user.is_authenticated %}
-    <p>You are signed in as {{ user }} with the
-        account {{ user.email }} as an Admin. </p>
-    <a class="btn btn-primary" href="logout">Logout</a>
-{% endif %}
-</center>
+{% block welcometext %}
+You are signed in as {{ user }} with the account {{ user.email }} as an Admin.
 {% endblock %}
