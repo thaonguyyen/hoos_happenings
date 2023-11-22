@@ -1,9 +1,11 @@
 {% extends 'authenticated.html' %}
 
 {% block postnav %}
+<center>
 <h2>Submit Event</h2>
 <p>Thank you for submitting the event "{{ submission.name }}"!</p>
 {% if not valid_location %}
     <p>Warning: The location you submitted is not in Google Maps, so it will not show up on the map.</p>
 {% endif %}
+</center>
 {% endblock %}
