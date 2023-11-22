@@ -67,6 +67,13 @@ def approve_event(request, event_id):
     event.save()
     return redirect('review_events')
 
+def reject_event(request, event_id):
+    if not request.user.is_authenticated:
+        return redirect('home')
+    event = EventSubmission.objects.get(id=event_id)
+    event.delete()
+    return redirect('review_events')
+
 def listings(request):
     if not request.user.is_authenticated:
         return redirect('home')

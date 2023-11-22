@@ -13,5 +13,6 @@ urlpatterns = [
     path('map/', views.map_view, name='map'),
     path('submit_event/', views.submit_event, name='submit_event'),
     path('review_events/', views.review_events, name='review_events'),
-    path('approve_event/<int:event_id>/', views.approve_event, name='approve_event')
+    path('approve_event/<int:event_id>/', views.approve_event, name='approve_event'),
+    path('reject_event/<int:event_id>/', views.reject_event, name='reject_event'),
 ]
