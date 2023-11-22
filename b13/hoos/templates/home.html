@@ -4,14 +4,9 @@
 
 {% block content %}
 <center>
-<h2 class="text-center">HoosHappenings Google Login</h2>
+<h2 class="text-center">HoosHappenings Login</h2>
 
 <a class="btn btn-primary" href="{% provider_login_url 'google' %}?next=/" style="margin-bottom: 10px;">Login With Google</a>
 
-{% if user.is_authenticated %}
-<div class="vertical-stack">
-    <a class="btn btn-primary" href="{% url 'authenticate' %}" style="margin-bottom: 10px;">Check Admin or User Credentials</a>
-</div>
-{% endif %}
 </center>
 {% endblock %}

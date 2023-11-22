@@ -6,11 +6,13 @@ from .models import EventSubmission
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+def check_authenticated(request):
+    pass
+
+def is_admin(user):
+    return user.is_authenticated and user.is_superuser
 
 # Create your views here.
-def is_admin(user):
-    return user.is_superuser
-
 def home(request):
     if request.user.is_authenticated:
         return redirect('welcome')
@@ -21,15 +23,21 @@ def logout_view(request):
     return redirect("/")
 
 def welcome(request):
+    if not request.user.is_authenticated:
+        return redirect('home')
     user_type = 'an Admin' if is_admin(request.user) else 'a User'
     return render(request, 'welcome.html', context={'user_type': user_type})
 
 def user_map(request):
+    if not request.user.is_authenticated:
+        return redirect('home')
     events = EventSubmission.objects.filter(approved=True)
     context = {'events': events}
     return render(request, "user_map.html", context)
 
 def admin_map(request):
+    if not request.user.is_authenticated:
+        return redirect('home')
     events = EventSubmission.objects.filter(approved=True)
     context = {'events': events}
     return render(request, "admin_map.html", context)
@@ -40,12 +48,18 @@ def admin_login(request):
     return redirect('home_user')
 
 def admin_view(request):
+    if not request.user.is_authenticated:
+        return redirect('home')
     return render(request, 'home_admin.html')
 
 def user_view(request):
+    if not request.user.is_authenticated:
+        return redirect('home')
     return render(request, 'home_user.html')
 
 def submit_event(request):
+    if not request.user.is_authenticated:
+        return redirect('home')
     if request.method == 'POST':
         form = EventSubmissionForm(request.POST)
         if form.is_valid():
@@ -63,19 +77,27 @@ def submit_event(request):
     return render(request, 'submit.html', {'form': form})
 
 def review_events(request):
+    if not request.user.is_authenticated:
+        return redirect('home')
     events = EventSubmission.objects.filter(approved=False)
     return render(request, 'review.html', {'events': events})
 
 def approve_event(request, event_id):
+    if not request.user.is_authenticated:
+        return redirect('home')
     event = EventSubmission.objects.get(id=event_id)
     event.approved = True
     event.save()
     return redirect('review_event')
 
 def user_event_listings(request):
+    if not request.user.is_authenticated:
+        return redirect('home')
     events = EventSubmission.objects.filter(approved=True)
     return render(request, 'user_listings.html', {'events': events})
 
 def admin_event_listings(request):
+    if not request.user.is_authenticated:
+        return redirect('home')
     events = EventSubmission.objects.filter(approved=True)
     return render(request, 'admin_listings.html', {'events': events})
