@@ -12,3 +12,8 @@ class EventSubmissionForm(forms.ModelForm):
             'location': forms.TextInput(attrs={'id': 'autocomplete'}),
             'date_time': forms.DateTimeInput(attrs={'type': 'datetime-local'})
         }
+        tag = forms.ChoiceField(
+            choices=EventSubmission.Tags.choices,
+            widget=forms.Select,
+            required=False,
+        )
