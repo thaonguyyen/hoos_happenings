@@ -8,7 +8,7 @@
   <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;"></divstyle>
     {% include 'single_event.html' %}
     <a button type="submit" class="btn btn-primary" href="{% url 'approve_event' event.id %}">Approve</a>
-    <a button type="submit" class="btn btn-primary" href="{% url 'reject_event' event.id %}">Reject</a>
+    <a button type="submit" class="btn btn-secondary" href="{% url 'reject_event' event.id %}">Reject</a>
   </div>
     {% empty %}
     <p>No events to approve.</p>

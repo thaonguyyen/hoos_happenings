@@ -1,5 +1,5 @@
 import googlemaps
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
 from .forms import EventSubmissionForm
 from .models import EventSubmission
@@ -11,6 +11,13 @@ def check_authenticated(request):
 
 def is_admin(user):
     return user.is_authenticated and user.is_superuser
+
+def assign_approval_status(request, event_id, approval_status):
+    event = get_object_or_404(EventSubmission, id=event_id)
+    redirect_url = request.META.get('HTTP_REFERER', reverse('home'))
+    event.approval_status = approval_status
+    event.rejected = True
+    return redirect(redirect_url)
 
 # Create your views here.
 def home(request):
@@ -58,7 +65,7 @@ def review_events(request):
         return redirect('home')
     if not is_admin(request.user):
         return redirect('home')
-    events = EventSubmission.objects.filter(approved=False)
+    events = EventSubmission.objects.filter(approval_status='pending')
     return render(request, 'review.html', {'events': events})
 
 def approve_event(request, event_id):
@@ -66,28 +73,34 @@ def approve_event(request, event_id):
         return redirect('home')
     if not is_admin(request.user):
         return redirect('home')
-    event = EventSubmission.objects.get(id=event_id)
-    event.approved = True
-    event.save()
-    return redirect('review_events')
+    return assign_approval_status(request, event_id, 'approved')
 
 def reject_event(request, event_id):
     if not request.user.is_authenticated:
         return redirect('home')
     if not is_admin(request.user):
         return redirect('home')
-    event = EventSubmission.objects.get(id=event_id)
+    return assign_approval_status(request, event_id, 'rejected')
+
+def delete_event(request, event_id):
+    if not request.user.is_authenticated:
+        return redirect('home')
+    if not is_admin(request.user):
+        return redirect('home')
+    
+    event = get_object_or_404(EventSubmission, id=event_id)
+    redirect_url = request.META.get('HTTP_REFERER', reverse('home'))
     event.delete()
-    return redirect('review_events')
+    return redirect(redirect_url)
 
 def listings(request):
     if not request.user.is_authenticated:
         return redirect('home')
-    events = EventSubmission.objects.filter(approved=True)
+    events = EventSubmission.objects.filter(approval_status='approved')
     return render(request, 'listings.html', context={'events': events})
 
 def map_view(request):
     if not request.user.is_authenticated:
         return redirect('home')
-    events = EventSubmission.objects.filter(approved=True)
+    events = EventSubmission.objects.filter(approval_status='approved')
     return render(request, "map.html", context={'events': events})

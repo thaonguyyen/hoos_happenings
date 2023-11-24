@@ -17,8 +17,19 @@ class EventSubmission(models.Model):
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
     date_time = models.DateTimeField(default=None)
-    approved = models.BooleanField(default=False)
     tags = models.ManyToManyField(Tag)
+
+    APPROVAL_CHOICES = [
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+    ]
+
+    approval_status = models.CharField(
+        max_length=20,
+        choices=APPROVAL_CHOICES,
+        default='pending',
+    )
 
     def __str__(self):
         return f"{self.name} by {self.user.username}"
