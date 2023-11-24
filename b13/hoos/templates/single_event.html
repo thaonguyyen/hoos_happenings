@@ -1,0 +1,10 @@
+    <h3>{{ event.name }}</h3>
+    <p>ℹ️ {{ event.description }}</p>
+    <p>📍 {{ event.location }}</p>
+    <p>🕒 {{ event.date_time }}</p>
+    <p>🏷️
+    {% for tag in event.tags.all %}
+        {{ tag.name }}
+        {% if not forloop.last %}|{% endif %}
+    {% endfor %}    
+    </p>

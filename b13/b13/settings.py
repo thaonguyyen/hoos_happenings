@@ -30,7 +30,6 @@ ALLOWED_HOSTS = ['hoos-fcd2d4c24696.herokuapp.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
-SITE_ID = 6
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -40,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hoos',
-    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',

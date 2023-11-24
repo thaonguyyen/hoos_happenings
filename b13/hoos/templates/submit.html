@@ -6,32 +6,32 @@
     <h2>Submit Event</h2>
     <form method="post">
       {% csrf_token %}
-      <div class="mb-3">
-        <label class="form-label">Event Name:</label>
-        {{ form.name }}
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Event Description:</label>
-        {{ form.description }}
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Event Location:</label>
-        {{ form.location }}
-        <span class="help-text">{{ form.location.help_text }}</span>
-      </div>
-      <div class="mb-3">
-          <label class="form-label">Date and Time:</label>
-          {{ form.date_time }}
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Tags:</label>
-        {% for tag in form.tag %}
-        <div class="form-check">
-          <input class="form-check-input" id="{{ tag.id }}" name="{{ tag.name }}" type="checkbox"
-                 value="{{ tag.value }}">
-          <label class="form-check-label" for="{{ tag.id }}">{{ tag.choice_label }}</label>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label">Event Name:</label>
+            {{ form.name }}
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Event Description:</label>
+            {{ form.description }}
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Event Location:</label>
+            {{ form.location }}
+            <span class="help-text">{{ form.location.help_text }}</span>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Date and Time:</label>
+            {{ form.date_time }}
+          </div>
         </div>
-        {% endfor %}
+        <div class="col-md-6">
+          <div class="mb-3">
+              <label class="form-label">Tags:</label>
+              {{ form.tags }}
+          </div>
+        </div>
       </div>
       <button type="submit" class="btn btn-primary">Submit Event</button>
     </form>

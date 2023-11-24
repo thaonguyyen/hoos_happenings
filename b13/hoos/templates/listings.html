@@ -2,21 +2,14 @@
 
 {% block postnav %}
 <center>
-  {% for event in events %}
-  <div>
-    <h2>{{ event.name }}</h2>
-    <p>{{ event.description }}</p>
-    <p>{{ event.location }}</p>
-    <p>{{ event.date_time }}</p>
-    <p>Tags:
-      {% for tag in event.tag.split(",") %}
-      {{ tag }}{% if not forloop.last %}, {% endif %}
-      {% endfor %}
-    </p>
-  </div>
-  {% empty %}
-  <p>No events available.</p>
-  {% endfor %}
+  <h1>Event Listings</h1>
 </center>
+{% for event in events %}
+    <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+      {% include 'single_event.html' %}
+    </div>
+      {% empty %}
+      <p>No events available.</p>
+  {% endfor %}
 {% endblock %}
 
