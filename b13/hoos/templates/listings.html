@@ -2,16 +2,12 @@
 
 {% block postnav %}
 <center>
-{% for event in events %}
-  <div>
-    <h2>{{ event.name }}</h2>
-    <p>{{ event.description }}</p>
-    <p>{{ event.location }}</p>
-    <p>{{ event.date_time }}</p>
-    <p>{{ event.tag }}</p>
-  </div>
-    {% empty %}
-    <p>No events available.</p>
-{% endfor %}
+  {% for event in events %}
+    <div>
+      {% include 'single_event.html' %}
+    </div>
+      {% empty %}
+      <p>No events available.</p>
+  {% endfor %}
 </center>
 {% endblock %}
