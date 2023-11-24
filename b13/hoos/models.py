@@ -20,9 +20,9 @@ class EventSubmission(models.Model):
     tags = models.ManyToManyField(Tag)
 
     APPROVAL_CHOICES = [
-        ('pending', 'Pending'),
-        ('approved', 'Approved'),
-        ('rejected', 'Rejected'),
+        ('pending', '⏰ Pending'),
+        ('approved', '✅ Approved'),
+        ('rejected', '❌ Rejected'),
     ]
 
     approval_status = models.CharField(

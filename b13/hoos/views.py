@@ -104,3 +104,9 @@ def map_view(request):
         return redirect('home')
     events = EventSubmission.objects.filter(approval_status='approved')
     return render(request, "map.html", context={'events': events})
+
+def my_events(request):
+    if not request.user.is_authenticated:
+        return redirect('home')
+    events = EventSubmission.objects.filter(user=request.user)
+    return render(request, 'my_events.html', context={'events': events})
