@@ -16,7 +16,7 @@ def assign_approval_status(request, event_id, approval_status):
     event = get_object_or_404(EventSubmission, id=event_id)
     redirect_url = request.META.get('HTTP_REFERER', reverse('home'))
     event.approval_status = approval_status
-    event.rejected = True
+    event.save()
     return redirect(redirect_url)
 
 # Create your views here.

@@ -2,12 +2,22 @@
 
 {% block postnav %}
 <center>
-  <h1>Event Listings</h1>
+  <h1>My Events</h1>
 </center>
 {% for event in events %}
     <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-      {% include 'single_event.html' %}
+      <h3>{{ event.name }}</h3>
+      <p>ℹ️ {{ event.description }}</p>
+      <p>📍 {{ event.location }}</p>
+      <p>🕒 {{ event.date_time }}</p>
+      <p>🏷️
+      {% for tag in event.tags.all %}
+          {{ tag.name }}
+          {% if not forloop.last %}|{% endif %}
+      {% endfor %}
+      <p><strong>Status:</strong> {{ event.get_approval_status_display }}</p>
       {% if user.is_superuser %}
+        <a button type="submit" class="btn btn-primary" href="{% url 'approve_event' event.id %}">Approve</a>
         <a button type="submit" class="btn btn-secondary" href="{% url 'reject_event' event.id %}">Reject</a>
         <a button type="submit" class="btn btn-danger" href="{% url 'delete_event' event.id %}">Delete</a>
       {% endif %}
