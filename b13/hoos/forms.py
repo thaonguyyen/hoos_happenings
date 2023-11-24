@@ -6,6 +6,10 @@ class DateTimeInput(forms.DateTimeInput):
 
 class EventSubmissionForm(forms.ModelForm):
     class Meta:
+        tag = forms.MultipleChoiceField(
+            choices=[('tag1', 'Tag 1'), ('tag2', 'Tag 2'), ('tag3', 'Tag 3')],
+            widget=forms.CheckboxSelectMultiple
+        )
         model = EventSubmission
         fields = ['name', 'description', 'location', 'date_time', 'tag']
         widgets = {
