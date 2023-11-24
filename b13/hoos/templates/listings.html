@@ -2,12 +2,13 @@
 
 {% block postnav %}
 <center>
-  {% for event in events %}
-    <div>
+  <h1>Event Listings</h1>
+</center>
+{% for event in events %}
+    <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
       {% include 'single_event.html' %}
     </div>
       {% empty %}
       <p>No events available.</p>
   {% endfor %}
-</center>
 {% endblock %}

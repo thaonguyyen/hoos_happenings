@@ -2,8 +2,10 @@
 
 {% block postnav %}
 <center>
+  <h1>Review Events</h1>
+</center>
 {% for event in events %}
-  <div>
+  <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;"></divstyle>
     {% include 'single_event.html' %}
     <a button type="submit" class="btn btn-primary" href="{% url 'approve_event' event.id %}">Approve</a>
     <a button type="submit" class="btn btn-primary" href="{% url 'reject_event' event.id %}">Reject</a>
@@ -11,5 +13,4 @@
     {% empty %}
     <p>No events to approve.</p>
 {% endfor %}
-</center>
 {% endblock %}
