@@ -1,8 +1,8 @@
-from django.core.management.commands import makemigrations
-from django.core.management.commands import migrate
+from django.core.management.base import BaseCommand
+from django.core.management import call_command
 from ...models import Tag
 
-class CreateDefaultTagsCommand(makemigrations.Command):
+class Command(BaseCommand):
     help = 'Create initial set of tags'
 
     def handle(self, *args, **options):
@@ -23,6 +23,7 @@ class CreateDefaultTagsCommand(makemigrations.Command):
         ]
 
         for tag in default_tags:
-            Tag.objects.get_or_create(**{'name': tag})
+            Tag.objects.get_or_create(name=tag)
 
-        migrate.Command().handle(*args, **options)
+        # Run migrate command to apply changes to the database
+        call_command('migrate', *args, **options)

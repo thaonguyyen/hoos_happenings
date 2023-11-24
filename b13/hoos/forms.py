@@ -1,5 +1,5 @@
 from django import forms
-from .models import EventSubmission
+from .models import EventSubmission, Tag
 
 class DateTimeInput(forms.DateTimeInput):
     input_type = 'datetime'
@@ -12,3 +12,8 @@ class EventSubmissionForm(forms.ModelForm):
             'location': forms.TextInput(attrs={'id': 'autocomplete'}),
             'date_time': forms.DateTimeInput(attrs={'type': 'datetime-local'})
         }
+
+    tags = forms.ModelMultipleChoiceField(
+        queryset=Tag.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+    )
