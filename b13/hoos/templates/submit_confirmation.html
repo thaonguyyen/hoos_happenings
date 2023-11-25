@@ -14,5 +14,11 @@
 {% endif %}
 <a button type="submit" class="btn btn-primary" href="{% url 'submit_event' %}">Submit another event</a>
 <a button type="submit" class="btn btn-primary" href="{% url 'listings' %}">See Event Listings</a>
+
+<p>
+    <br>
+    You can also monitor the status of your event here:
+</p>
+<a button type="submit" class="btn btn-primary" href="{% url 'my_events' %}">My Events</a>
 </center>
 {% endblock %}
