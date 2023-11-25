@@ -108,7 +108,14 @@ def listings(request):
         events = events.filter(name__icontains=name_filter)
         show_btn = True
         name = name_filter
-    return render(request, 'listings.html', context={'events': events, 'form': form, 'show': show_btn, 'name': name, 'tags': tag_filter})
+    date_filter = [request.GET.get("after"), request.GET.get("before")]
+    if date_filter[0]:
+        events = events.filter(date_time__gt=date_filter[0])
+        show_btn = True
+    if date_filter[1]:
+        events = events.filter(date_time__lt=date_filter[1])
+        show_btn = True
+    return render(request, 'listings.html', context={'events': events, 'form': form, 'show': show_btn, 'name': name, 'tags': tag_filter, 'date': date_filter})
 
 def map_view(request):
     if not request.user.is_authenticated:
@@ -127,7 +134,14 @@ def map_view(request):
         events = events.filter(name__icontains=name_filter)
         show_btn = True
         name = name_filter
-    return render(request, "map.html", context={'events': events, 'form': form, 'show': show_btn, 'name': name, 'tags': tag_filter})
+    date_filter = [request.GET.get("after"), request.GET.get("before")]
+    if date_filter[0]:
+        events = events.filter(date_time__gt=date_filter[0])
+        show_btn = True
+    if date_filter[1]:
+        events = events.filter(date_time__lt=date_filter[1])
+        show_btn = True
+    return render(request, "map.html", context={'events': events, 'form': form, 'show': show_btn, 'name': name, 'tags': tag_filter, 'date': date_filter})
 
 def my_events(request):
     if not request.user.is_authenticated:

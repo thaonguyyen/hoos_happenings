@@ -6,24 +6,28 @@
     <div id="map"></div> <!-- Container for the map -->
     <div id="search-container">
         <form method="get" style="padding-bottom: 10px">
-            <!--<input type="text" id="event-search" placeholder="Search by event name...">-->
             <label>Search by Name:</label>
             <div>
                 <input type="text" name="name" {% if name %} value="{{ name }}"{% endif %} style="margin-bottom: 10px">
             </div>
             <button type="submit" class="btn btn-primary" style="margin-bottom: 10px">Search</button>
-
+            <div style="padding-bottom: 5px;">
+                <label style="display: block">Events After:</label>
+                <input type="datetime-local" name="after" {% if date.0 %} value="{{ date.0 }}"{% endif %}>
+            </div>
+            <div>
+                <label style="display: block">Events Before:</label>
+                <input type="datetime-local" name="before" {% if date.1 %} value="{{ date.1 }}"{% endif %}>
+            </div>
             <div style="margin-bottom: 10px">
                 <label class="form-label">Tags:</label>
                 {{ form.tags }}
             </div>
             <button type="submit" class="btn btn-primary">Filter</button>
+            {% if show %}
+                <a href="{% url 'map' %}"><button type="button" class="btn btn-secondary">Remove All Filters</button></a>
+            {% endif %}
         </form>
-        {% if show %}
-            <form style="margin-top: 30px">
-                <button type="submit" class="btn btn-secondary">Remove All Filters</button>
-            </form>
-        {% endif %}
         <div id="event-list"></div> <!-- Container for listing events -->
     </div>
 </div>
