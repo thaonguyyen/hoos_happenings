@@ -95,13 +95,39 @@ def listings(request):
     if not request.user.is_authenticated:
         return redirect('home')
     events = EventSubmission.objects.filter(approval_status='approved')
-    return render(request, 'listings.html', context={'events': events})
+    show_btn = False
+    name = ""
+    form = EventSubmissionForm()
+    tag_filter = request.GET.get('tags')
+    if tag_filter:
+        form = EventSubmissionForm(initial={'tags': tag_filter})
+        events = events.filter(tags=tag_filter)
+        show_btn = True
+    name_filter = request.GET.get('name')
+    if name_filter:
+        events = events.filter(name__icontains=name_filter)
+        show_btn = True
+        name = name_filter
+    return render(request, 'listings.html', context={'events': events, 'form': form, 'show': show_btn, 'name': name, 'tags': tag_filter})
 
 def map_view(request):
     if not request.user.is_authenticated:
         return redirect('home')
     events = EventSubmission.objects.filter(approval_status='approved')
-    return render(request, "map.html", context={'events': events})
+    show_btn = False
+    name = ""
+    form = EventSubmissionForm()
+    tag_filter = request.GET.get('tags')
+    if tag_filter:
+        form = EventSubmissionForm(initial={'tags': tag_filter})
+        events = events.filter(tags=tag_filter)
+        show_btn = True
+    name_filter = request.GET.get('name')
+    if name_filter:
+        events = events.filter(name__icontains=name_filter)
+        show_btn = True
+        name = name_filter
+    return render(request, "map.html", context={'events': events, 'form': form, 'show': show_btn, 'name': name, 'tags': tag_filter})
 
 def my_events(request):
     if not request.user.is_authenticated:

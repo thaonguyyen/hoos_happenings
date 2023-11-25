@@ -5,7 +5,25 @@
     <input type="text" id="location-input" placeholder="Search for a location...">
     <div id="map"></div> <!-- Container for the map -->
     <div id="search-container">
-        <input type="text" id="tag-search" placeholder="Search by tag...">
+        <form method="get" style="padding-bottom: 10px">
+            <!--<input type="text" id="event-search" placeholder="Search by event name...">-->
+            <label>Search by Name:</label>
+            <div>
+                <input type="text" name="name" {% if name %} value="{{ name }}"{% endif %} style="margin-bottom: 10px">
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-bottom: 10px">Search</button>
+
+            <div style="margin-bottom: 10px">
+                <label class="form-label">Tags:</label>
+                {{ form.tags }}
+            </div>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+        {% if show %}
+            <form style="margin-top: 30px">
+                <button type="submit" class="btn btn-secondary">Remove All Filters</button>
+            </form>
+        {% endif %}
         <div id="event-list"></div> <!-- Container for listing events -->
     </div>
 </div>

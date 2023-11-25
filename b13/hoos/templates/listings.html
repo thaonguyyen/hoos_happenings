@@ -4,16 +4,37 @@
 <center>
   <h1>Event Listings</h1>
 </center>
-{% for event in events %}
-    <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-      {% include 'single_event.html' %}
-      {% if user.is_superuser %}
-        <a button type="submit" class="btn btn-secondary" href="{% url 'reject_event' event.id %}">Reject</a>
-        {% include 'delete_button.html' %}
-      {% endif %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        {% for event in events %}
+            <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+              {% include 'single_event.html' %}
+              {% if user.is_superuser %}
+                <a button type="submit" class="btn btn-secondary" href="{% url 'reject_event' event.id %}">Reject</a>
+                {% include 'delete_button.html' %}
+              {% endif %}
+            </div>
+              {% empty %}
+              <p>No events available.</p>
+        {% endfor %}
     </div>
-      {% empty %}
-      <p>No events available.</p>
-  {% endfor %}
+    <div class="col-md-2">
+        <form method="get" style="padding-bottom: 10px">
+            <label>Search by Name:</label>
+            <input type="text" name="name" {% if name %} value="{{ name }}"{% endif %} style="margin-bottom: 10px">
+            <button type="submit" class="btn btn-primary" style="margin-bottom: 10px">Search</button>
+            <div style="margin-bottom: 10px">
+                <label class="form-label">Tags:</label>
+                {{ form.tags }}
+            </div>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+        {% if show %}
+            <form style="margin-top: 20px">
+                <button type="submit" class="btn btn-secondary">Remove All Filters</button>
+            </form>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
 
