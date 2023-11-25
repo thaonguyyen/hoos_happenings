@@ -7,9 +7,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         default_tags = [
+            'Arts and Sciences',
             'Career',
             'Club',
-            'Arts and Sciences',
             'Concert',
             'Culture',
             'Education',
