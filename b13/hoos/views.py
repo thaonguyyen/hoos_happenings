@@ -85,8 +85,6 @@ def reject_event(request, event_id):
 def delete_event(request, event_id):
     if not request.user.is_authenticated:
         return redirect('home')
-    if not is_admin(request.user):
-        return redirect('home')
     
     event = get_object_or_404(EventSubmission, id=event_id)
     redirect_url = request.META.get('HTTP_REFERER', reverse('home'))

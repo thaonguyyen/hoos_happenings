@@ -20,7 +20,7 @@
         <a button type="submit" class="btn btn-primary" href="{% url 'approve_event' event.id %}">Approve</a>
         <a button type="submit" class="btn btn-secondary" href="{% url 'reject_event' event.id %}">Reject</a>
       {% endif %}
-      <a button type="submit" class="btn btn-danger" href="{% url 'delete_event' event.id %}">Delete</a>
+      {% include 'delete_button.html' %}
     </div>
       {% empty %}
       <p>No events available.</p>

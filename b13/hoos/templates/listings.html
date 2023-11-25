@@ -9,7 +9,7 @@
       {% include 'single_event.html' %}
       {% if user.is_superuser %}
         <a button type="submit" class="btn btn-secondary" href="{% url 'reject_event' event.id %}">Reject</a>
-        <a button type="submit" class="btn btn-danger" href="{% url 'delete_event' event.id %}">Delete</a>
+        {% include 'delete_button.html' %}
       {% endif %}
     </div>
       {% empty %}
