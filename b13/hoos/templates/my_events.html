@@ -17,8 +17,12 @@
       {% endfor %}
       <p><strong>Status:</strong> {{ event.get_approval_status_display }}</p>
       {% if user.is_superuser %}
+      {% if event.approval_status != 'approved' %}
         <a button type="submit" class="btn btn-primary" href="{% url 'approve_event' event.id %}">Approve</a>
+      {% endif %}
+      {% if event.approval_status != 'rejected' %}
         <a button type="submit" class="btn btn-secondary" href="{% url 'reject_event' event.id %}">Reject</a>
+      {% endif %}
       {% endif %}
       {% include 'delete_button.html' %}
     </div>
