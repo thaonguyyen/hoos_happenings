@@ -11,6 +11,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
       {% block nav %}{% include 'nav.html' %}{% endblock %}
+        <div class="ms-auto">
+        <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
+        </div>
       </div>
     </div>
   </nav>
