@@ -2,7 +2,7 @@
 
 {% block postnav %}
 <div id="map-and-search-container">
-    <input type="text" id="location-input" placeholder="Search for a location...">
+    <input type="text" id="location-input" placeholder="Search for a location..." style="width: 55%; height: 30px;">
     <div id="map"></div> <!-- Container for the map -->
     <div id="search-container">
         <form method="get" style="padding-bottom: 10px">
@@ -114,13 +114,14 @@
 
         const input = document.getElementById('location-input');
         const searchBox = new google.maps.places.SearchBox(input);
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
 
         searchBox.addListener('places_changed', function () {
             const places = searchBox.getPlaces();
             if (places.length === 0) {
                 return;
             }
+
 
             const bounds = new google.maps.LatLngBounds();
             places.forEach(function (place) {
