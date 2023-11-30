@@ -7,5 +7,19 @@
 <h2 class="text-center">Welcome to HoosHappenings!</h2>
 <p>You are signed in as {{ user }} with the account {{ user.email }} as {{ user_type }}.</p>
 
+    <div id="image-container"></div>
+
+    <script type="text/javascript">
+        function displayImage(url) {
+            const imageContainer = document.getElementById('image-container');
+            const img = document.createElement('img');
+            img.src = url;
+            img.alt = 'Display Image';
+            imageContainer.appendChild(img);
+        }
+
+        // Call the function with the URL passed from Django context
+        displayImage('{{ "https://images.fineartamerica.com/images-medium-large-5/university-of-virginia-academical-village-maria-rabinky.jpg" }}');
+    </script>
 </center>
 {% endblock %}
