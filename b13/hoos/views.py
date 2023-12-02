@@ -148,3 +148,10 @@ def my_events(request):
         return redirect('home')
     events = EventSubmission.objects.filter(user=request.user)
     return render(request, 'my_events.html', context={'events': events})
+
+def event_details(request, event_id):
+    if not request.user.is_authenticated:
+        return redirect('home')
+    event = get_object_or_404(EventSubmission, id=event_id)
+    context = {'event': event}
+    return render(request, 'event_details.html', context=context)
