@@ -5,7 +5,7 @@
 {% block postnav %}
 <center>
 {% include 'single_event.html' %}
-<p>Created by {{ event.user }}</p>
+<p>Created by {{ event.user }} on {{ event.date_time_created }}</p>
 </center>
 
 {% endblock %}
