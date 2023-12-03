@@ -78,9 +78,11 @@
         });
 
         // Add a click event listener to the userLocationMarker to display the infowindow
-        marker.addListener("click", function () {
+        marker.addListener("click", (function (eventLocation, marker) {
+            return function (){
                 eventLocation.open(map, marker);
-        });
+            };
+        })(eventLocation, marker));
 
     {% endfor %}
 
