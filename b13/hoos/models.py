@@ -17,7 +17,7 @@ class EventSubmission(models.Model):
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
     date_time = models.DateTimeField(default=None)
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, null=True, blank=True)
     date_time_created = models.DateTimeField(auto_now_add=True)
 
     APPROVAL_CHOICES = [
