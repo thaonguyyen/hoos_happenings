@@ -1,6 +1,6 @@
 <h3><a href="{% url 'event_details' event_id=event.id %}">{{ event.name }}</a></h3>
 <p>ℹ️ {{ event.description }}</p>
-<p>📍 {{ event.location }}</p>
+<p>📍 <a href="https://www.google.com/maps/search/?api=1&query={{ event.location }}" target="_blank">{{ event.location }}</a></p>
 <p>🕒 {{ event.date_time }}</p>
 <p>🏷️
 {% for tag in event.tags.all %}
