@@ -23,3 +23,13 @@ __How to use the app:__
 * See the status of your events in the "My Events" tab
 * (Admin only) Approve or reject events in the "Review Events" tab
     * Approved events will then be displayed in "Event Listings"
+
+__Test Users:__
+* Common User:
+  * Email - cs3240.student@gmail.com
+  * Username - student
+  * Password - student
+* Super user:
+  * Email - cs3240.super@gmail.com
+  * Username - super
+  * Password - super
