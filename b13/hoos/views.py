@@ -7,6 +7,7 @@ from .models import Tag
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.core.exceptions import ValidationError
+from django.utils import timezone
 
 def check_authenticated(request):
     pass
@@ -102,7 +103,10 @@ def delete_event(request, event_id):
 def listings(request):
     if not request.user.is_authenticated:
         return redirect('home')
-    events = EventSubmission.objects.filter(approval_status='approved').order_by('date_time')
+    events = EventSubmission.objects.filter(
+        approval_status='approved',
+        date_time__gte=timezone.now(),
+    ).order_by('date_time')
     show_btn = False
     name = ""
     form = EventSubmissionForm()
@@ -129,7 +133,7 @@ def listings(request):
 def map_view(request):
     if not request.user.is_authenticated:
         return redirect('home')
-    events = EventSubmission.objects.filter(approval_status='approved')
+    events = EventSubmission.objects.filter(approval_status='approved', date_time__gte=timezone.now())
     show_btn = False
     name = ""
     form = EventSubmissionForm()
