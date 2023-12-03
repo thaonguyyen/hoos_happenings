@@ -1,7 +1,25 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/xHnRfY9D)
-# Django Practice Assessment
+# HoosHappenings Django App
 
-__Name:__
+[See the app!](https://hoos-fcd2d4c24696.herokuapp.com/)
 
-__Computing ID:__
+__Contributors:__
+* Peter Tessier (fpv5gr)
+* Jordan Moss (jrm7jg)
+* Shaalini Sri Ramamoorthy Premalatha (vby6ba)
+* Thao Nguyen (vdk4dy)
+* Rowen Link (zgj4va)
 
+__App Summary:__
+HoosHappenings is a web application designed to allow students to post their own events and view others' events in order to both promote and explore. This app also connects with Google Maps, including a built-in map so one can easily see events. Another major feature is "tags" connected to each event (such as Career, Social) and the ability to filter the event list to only the tags you want.
+
+__How to use the app:__
+* Log in with a Google account.
+* See all the current events under the "Event Listings" tab
+    * Filter the events based on name, date, and tag with the right sidebar
+* See a map of nearby events under the "Map of Nearby Events" tab
+    * Filter the events in the same way
+* Submit an event under the "Submit Event" tab
+    * Once an admin approves the event, you can see it listed under "Event Listings"
+* See the status of your events in the "My Events" tab
+* (Admin only) Approve or reject events in the "Review Events" tab
+    * Approved events will then be displayed in "Event Listings"
