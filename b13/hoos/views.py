@@ -6,6 +6,7 @@ from .models import EventSubmission
 from .models import Tag
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.core.exceptions import ValidationError
 
 def check_authenticated(request):
     pass
@@ -46,6 +47,7 @@ def submit_event(request):
         return redirect('home')
     if request.method == 'POST':
         form = EventSubmissionForm(request.POST)
+        # try:
         if form.is_valid():
             submission = form.save(commit=False)
             gmaps = googlemaps.Client(key='AIzaSyBFnP0Yo4IN8h8Q1U4SjPKdJH9X1QeiKMc')
@@ -57,6 +59,11 @@ def submit_event(request):
             form.save()
             context = {'submission': submission, 'valid_location': bool(geocode_result)}
             return render(request, 'submit_confirmation.html', context=context)
+        else:
+            if 'date_time' not in form.errors:
+                form.add_error('date_time', 'Event cannot be in the past.')
+        # except ValidationError as e:
+        #     form.add_error('date_time', e)
     else:
         form = EventSubmissionForm()
     return render(request, 'submit.html', {'form': form})

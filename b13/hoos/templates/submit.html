@@ -32,6 +32,9 @@
               {{ form.tags }}
           </div>
         </div>
+        {% for error in form.date_time.errors %}
+        <p class="text-danger">{{ error }}</p>
+        {% endfor %}
       </div>
       <button type="submit" class="btn btn-primary">Submit Event</button>
     </form>
