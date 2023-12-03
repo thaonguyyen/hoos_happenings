@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
 from .forms import EventSubmissionForm
 from .models import EventSubmission
+from .models import Tag
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
@@ -98,10 +99,11 @@ def listings(request):
     show_btn = False
     name = ""
     form = EventSubmissionForm()
-    tag_filter = request.GET.get('tags')
+    tag_filter = request.GET.getlist('tags')
     if tag_filter:
+        for tag in tag_filter:
+            events = events.filter(tags=tag)
         form = EventSubmissionForm(initial={'tags': tag_filter})
-        events = events.filter(tags=tag_filter)
         show_btn = True
     name_filter = request.GET.get('name')
     if name_filter:
@@ -124,10 +126,11 @@ def map_view(request):
     show_btn = False
     name = ""
     form = EventSubmissionForm()
-    tag_filter = request.GET.get('tags')
+    tag_filter = request.GET.getlist('tags')
     if tag_filter:
+        for tag in tag_filter:
+            events = events.filter(tags=tag)
         form = EventSubmissionForm(initial={'tags': tag_filter})
-        events = events.filter(tags=tag_filter)
         show_btn = True
     name_filter = request.GET.get('name')
     if name_filter:
