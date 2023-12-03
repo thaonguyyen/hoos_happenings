@@ -6,15 +6,7 @@
 </center>
 {% for event in events %}
     <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-      <h3>{{ event.name }}</h3>
-      <p>ℹ️ {{ event.description }}</p>
-      <p>📍 {{ event.location }}</p>
-      <p>🕒 {{ event.date_time }}</p>
-      <p>🏷️
-      {% for tag in event.tags.all %}
-          {{ tag.name }}
-          {% if not forloop.last %}|{% endif %}
-      {% endfor %}
+      {% include 'single_event.html' %}
       <p><strong>Status:</strong> {{ event.get_approval_status_display }}</p>
       {% if user.is_superuser %}
       {% if event.approval_status != 'approved' %}
