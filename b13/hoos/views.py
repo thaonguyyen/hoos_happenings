@@ -102,27 +102,27 @@ def delete_event(request, event_id):
 def listings(request):
     if not request.user.is_authenticated:
         return redirect('home')
-    events = EventSubmission.objects.filter(approval_status='approved')
+    events = EventSubmission.objects.filter(approval_status='approved').order_by('date_time')
     show_btn = False
     name = ""
     form = EventSubmissionForm()
     tag_filter = request.GET.getlist('tags')
     if tag_filter:
         for tag in tag_filter:
-            events = events.filter(tags=tag)
+            events = events.filter(tags=tag).order_by('date_time')
         form = EventSubmissionForm(initial={'tags': tag_filter})
         show_btn = True
     name_filter = request.GET.get('name')
     if name_filter:
-        events = events.filter(name__icontains=name_filter)
+        events = events.filter(name__icontains=name_filter).order_by('date_time')
         show_btn = True
         name = name_filter
     date_filter = [request.GET.get("after"), request.GET.get("before")]
     if date_filter[0]:
-        events = events.filter(date_time__gt=date_filter[0])
+        events = events.filter(date_time__gt=date_filter[0]).order_by('date_time')
         show_btn = True
     if date_filter[1]:
-        events = events.filter(date_time__lt=date_filter[1])
+        events = events.filter(date_time__lt=date_filter[1]).order_by('date_time')
         show_btn = True
     return render(request, 'listings.html', context={'events': events, 'form': form, 'show': show_btn, 'name': name, 'tags': tag_filter, 'date': date_filter})
 
