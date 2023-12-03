@@ -63,9 +63,11 @@
         };
 
         const map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
+        // const eventsData = {{ events }};
+    
+        // console.log(eventsData);
                     {% for event in events %}
-        console.log(event)
+        console.log("{{event.name}}")
         var marker = new google.maps.Marker({
         position: { lat: {{ event.latitude }}, lng: {{ event.longitude }} },
         map: map,
@@ -74,7 +76,7 @@
 
         // Create an infowindow for the user's location
         var eventLocation = new google.maps.InfoWindow({
-            content: "{{ event.description }}"
+            content: '<a href="{% url 'event_details' event_id=event.id %}">{{ event.name }}</a>'
         });
 
         // Add a click event listener to the userLocationMarker to display the infowindow

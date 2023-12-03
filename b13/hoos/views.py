@@ -156,5 +156,5 @@ def event_details(request, event_id):
     if not request.user.is_authenticated:
         return redirect('home')
     event = get_object_or_404(EventSubmission, id=event_id)
-    context = {'event': event}
+    context = {'event': event, 'long_description': True}
     return render(request, 'event_details.html', context=context)
