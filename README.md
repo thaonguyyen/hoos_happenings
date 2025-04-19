@@ -2,13 +2,6 @@
 
 [See the app!](https://hoos-fcd2d4c24696.herokuapp.com/)
 
-__Contributors:__
-* Peter Tessier (fpv5gr)
-* Jordan Moss (jrm7jg)
-* Shaalini Sri Ramamoorthy Premalatha (vby6ba)
-* Thao Nguyen (vdk4dy)
-* Rowen Link (zgj4va)
-
 __App Summary:__
 HoosHappenings is a web application designed to allow students to post their own events and view others' events in order to both promote and explore. This app also connects with Google Maps, including a built-in map so one can easily see events. Another major feature is "tags" connected to each event (such as Career, Social) and the ability to filter the event list to only the tags you want.
 
